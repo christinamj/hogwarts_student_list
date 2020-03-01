@@ -1,0 +1,329 @@
+:root {
+  --primary-color: rgba(0, 0, 0, 0.89);
+  --secondary-color: white;
+}
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+.top h1 {
+  margin-top: 0vw;
+  padding-top: 5vw;
+}
+
+.choosetheme h4 {
+  margin: 0;
+}
+
+.crest {
+  height: 5vw;
+  width: 5vw;
+}
+
+.filter {
+  background-color: #949292ef;
+  border: none;
+  color: white;
+  padding: 10px 8px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.house {
+  font-size: 0.8em;
+}
+
+.name,
+.prefect {
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.name:hover {
+  transform: scale(1.04);
+}
+
+.filter:hover {
+  background-color: rgba(39, 39, 39, 0.89);
+  transform: scale(1.1);
+}
+
+.sort:hover {
+  text-decoration: underline;
+}
+
+#theme {
+  cursor: pointer;
+}
+
+.choosetheme {
+  background-color: rgba(0, 0, 0, 0.89);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: white;
+  padding-top: 4vw;
+  padding-left: 8vw;
+  height: 30vw;
+  padding-bottom: 5vw;
+}
+
+.themewrapper {
+  padding-top: 2vw;
+}
+
+.sort {
+  background-color: #c7c6c600;
+  border: none;
+  color: white;
+  font-style: italic;
+  font-size: 0.8em;
+  cursor: pointer;
+}
+
+.student {
+  border-bottom: solid 1px;
+  padding-bottom: 2vw;
+}
+
+.list {
+  margin-top: 0;
+  padding-top: 0vw;
+  display: grid;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(255px, 1fr));
+  padding: 50px;
+  grid-gap: 2em;
+  padding-left: 8vw;
+  padding-right: 8vw;
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
+  font-family: "Montserrat", sans-serif;
+}
+
+#theme {
+  background-color: #6a996c;
+  border: none;
+  color: white;
+  font-size: 13px;
+}
+
+.top {
+  height: 60vw;
+  width: 100%;
+  background-image: url(/HogwartsCastle_WB_F4_HogwartsThroughTheTrees_Illust_100615_Land.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  color: white;
+  font-family: "Montserrat", sans-serif;
+  padding-left: 8vw;
+}
+
+.popup {
+  display: none;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  justify-content: center;
+  align-items: center;
+}
+
+.contentpopup {
+  width: 80%;
+  max-width: 500px;
+  height: 60%;
+  color: var(--secondary-color);
+  background-color: var(--primary-color);
+  padding: 30px;
+  position: relative;
+  font-family: "Montserrat", sans-serif;
+  padding-left: 6vw;
+}
+
+#popup_samehouse,
+#popup_toomany {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50%;
+  background-color: whitesmoke;
+  /* width: 200px;
+  height: 100px;
+  position: fixed;
+  top: calc(50% - 50px); // half of width */
+}
+
+.content_samehouse,
+.content_toomany {
+  padding: 40px;
+  position: relative;
+  font-family: "Montserrat", sans-serif;
+}
+
+[data-house="Gryffindor"] {
+  --primary-color: #a51b1f;
+  --secondary-color: white;
+}
+
+[data-house="Hufflepuff"] {
+  --primary-color: #ffcf47;
+  --secondary-color: black;
+}
+
+[data-house="Ravenclaw"] {
+  --primary-color: #4a90ce;
+}
+
+[data-house="Slytherin"] {
+  --primary-color: #1d7453;
+  --secondary-color: white;
+}
+
+.list [data-house="default"] {
+  --primary-color: black;
+}
+
+/* THEMES....
+
+
+
+.list [data-theme="default"] {
+  --primary-color: black;
+}
+.list {
+  background-color: var(--primary-color);
+}
+.list[data-theme="Gryffindor"] {
+  --primary-color: #a51b1f;
+  --secondary-color: white;
+}
+.popup[data-theme="Gryffindor"] {
+  --primary-color: #a51b1f;
+  --secondary-color: white;
+}
+
+.popup[data-theme="Hufflepuff"] {
+  --primary-color: #ffcf47;
+  --secondary-color: black;
+}
+
+.list[data-theme="Hufflepuff"] {
+  --primary-color: #ffcf47;
+  --secondary-color: black;
+}
+.popup[data-theme="Slytherin"] {
+  --primary-color: #1d7453;
+  --secondary-color: white;
+}
+
+.list[data-theme="Slytherin"] {
+  --primary-color: #1d7453;
+  --secondary-color: white;
+}
+.list[data-theme="Ravenclaw"] {
+  --primary-color: #4a90ce;
+}
+
+.popup[data-theme="Slytherin"] {
+  --primary-color: #4a90ce;
+  --secondary-color: white;
+} */
+
+/* .popup {
+  display: none;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
+  justify-content: center;
+  align-items: center;
+} */
+.popup-appear {
+  display: flex;
+}
+
+@media only screen and (min-width: 550px) {
+  .choosetheme {
+    height: 22vw;
+  }
+}
+
+@media only screen and (min-width: 650px) {
+  .choosetheme {
+    height: 18vw;
+  }
+
+  .filter {
+    padding: 12px 22px;
+
+    font-size: 12px;
+  }
+
+  .top {
+    height: 40vw;
+  }
+
+  .top h1 {
+    padding-top: 10vw;
+  }
+}
+
+@media only screen and (min-width: 850px) {
+  .choosetheme {
+    height: 15vw;
+  }
+
+  .top {
+    height: 36vw;
+  }
+}
+
+@media only screen and (min-width: 1000px) {
+  .choosetheme {
+    height: 13vw;
+  }
+
+  .top {
+    height: 34vw;
+  }
+
+  .top h3 {
+    padding-top: 2vw;
+  }
+}
+
+@media only screen and (min-width: 1100px) {
+  .choosetheme {
+    height: 13vw;
+  }
+
+  .top {
+    height: 32vw;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .choosetheme {
+    height: 12vw;
+    padding-bottom: 5vw;
+  }
+
+  .top {
+    height: 27vw;
+  }
+}

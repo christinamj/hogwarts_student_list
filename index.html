@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Student List Hogwarts 1991</title>
+  </head>
+
+  <body>
+    <header>
+      <!-- <img src="logo.png" alt="logo" /> -->
+    </header>
+    <main>
+      <section class="section-wrapper">
+        <div class="top">
+          <h1>Student List</h1>
+
+            <br />
+
+            <h3>Houses</h3>
+            <section class="filtrering">
+              <button class="filter" data-action="filter" data-filter="Gryffindor">Gryffindor</button>
+              <button class="filter" data-action="filter" data-filter="Hufflepuff">Hufflepuff</button>
+              <button class="filter" data-action="filter" data-filter="Ravenclaw">Ravenclaw</button>
+              <button class="filter" data-action="filter" data-filter="Slytherin">Slytherin</button>
+              <button class="filter" data-action="filter" data-filter="all">All students</button>
+            </section>
+
+
+            <br />
+
+            <!-- <h4>Search for student</h4>
+            <section id="lede-sektion">
+              <input type="text" placeholder="skriv søgeord" id="lede-tekst" />
+              <button id="lede-knap">Søg</button>
+              <button id="alle-knap">Vis alle</button> <span id="antal">0</span>
+            </section> -->
+          </label>
+        </div>
+
+        <div class="choosetheme">
+          <div>
+          <h4>Sort by names:</h4>
+          <br />
+          <!-- <th data-action="sort" data-sort-direction="asc" data-sort="star">⭐</th> -->
+          <button class="sort" data-sort-direction="asc" data-sort="firstName">Firstname</button>
+          <button class="sort" data-sort-direction="asc" data-sort="lastName">Lastname</button>
+          <button class="sort" data-sort-direction="asc" data-sort="gender">Gender</button>
+          <button class="sort" data-sort-direction="asc" data-sort="house">House</button>
+        </div>
+        <div class="themewrapper">
+          Choose theme
+          <label id="modal">
+            <select name="theme" id="theme">
+              <option value="deafult">Default theme</option>
+              <option value="Gryffindor">Gryffindor theme</option>
+              <option value="Hufflepuff">Hufflepuff theme</option>
+              <option value="Ravenclaw">Ravenclaw theme</option>
+              <option value="Slytherin">Slytherin theme</option>
+            </select>
+          </div>
+        </div>
+        <ul class="list"></ul>
+      </section>
+
+      <div class="popup">
+        <article class="contentpopup">
+          <button class="close">X</button>
+          <h2></h2>
+          <h3></h3>
+          <h4></h4>
+          <p></p>
+          <p id="pstar">prefect</p>
+          <img src="" />
+        </article>
+      </div>
+
+      <div id="popup_samehouse">
+        <div class="content_samehouse"
+          <h2><b>ERROR</b></h2>
+          <p>You can only choose one prefect from each house. Remove one and try again.</p>
+          <button class="ok">OK</button>
+          </div>
+      </div>
+
+      <div id="popup_toomany">
+        <div class="content_toomany"
+        <h2><b>ERROR</b></h2>
+          <p>You can only choose two prefects. Remove one and try again.</p>
+          <button class="ok">OK</button>
+          </div>
+      </div>
+    </main>
+
+    <footer></footer>
+    <template class="students-template">
+      <div class="student">
+        <p class="name"></p>
+        <p class="house"></p>
+        <p class="blood"></p>
+        <p class="prefect">⭐</p>
+        <img class="crest">
+        <button class="expel">Expel student</button>
+      </div>
+    </template>
+    <script src="script.js"></script>
+  </body>
+</html>
