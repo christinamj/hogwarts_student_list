@@ -5,8 +5,11 @@ document.addEventListener("DOMContentLoaded", start);
 const HTML = {};
 let studentJSON = [];
 let allStudents = [];
+let allOfStudent = [];
 let currentList = [];
 let expelledStudents = [];
+let filteredArray = [];
+let prefects = [];
 
 let countsOfStudents;
 const myHeading = document.querySelectorAll(".sort");
@@ -24,7 +27,7 @@ const Student = {
   house: "",
   bloodstatus: "",
   prefect: false,
-  expelled: false
+  expelled: false,
 };
 
 //START AND GET JSON
@@ -36,18 +39,19 @@ function start() {
   HTML.wrapper = document.querySelector(".section-wrapper");
   HTML.studentName = document.querySelector(".contentpopup>h2");
 
-  //ADD EVENTLISTENER FOR FILTER
+  //EVENTLISTENER FILTER BUTTONS
   document.querySelector("[data-filter='Gryffindor']").addEventListener("click", filterGryffindor);
   document.querySelector("[data-filter='Hufflepuff']").addEventListener("click", filterHufflepuff);
   document.querySelector("[data-filter='Ravenclaw']").addEventListener("click", filterRavenclaw);
   document.querySelector("[data-filter='Slytherin']").addEventListener("click", filterSlytherin);
   document.querySelector("[data-filter='all']").addEventListener("click", showAll);
+  // document.querySelector("[data-filter='expel']").addEventListener("click", showExpelled);
 
-  myHeading.forEach(button => {
+  myHeading.forEach((button) => {
     button.addEventListener("click", sortButtonClick);
   });
 
-  myButtons.forEach(botton => {
+  myButtons.forEach((botton) => {
     botton.addEventListener("click", filterBottonClick);
   });
 
@@ -202,11 +206,11 @@ function cleanData(studentData) {
   halfBlood = bloodArray.half;
   pureBlood = bloodArray.pure;
 
-  const halfBloodType = halfBlood.some(halfBlood => {
+  const halfBloodType = halfBlood.some((halfBlood) => {
     return halfBlood === student.lastName;
   });
 
-  const pureBloodType = pureBlood.some(pureBlood => {
+  const pureBloodType = pureBlood.some((pureBlood) => {
     return pureBlood === student.lastName;
   });
 
@@ -227,8 +231,10 @@ function cleanData(studentData) {
 //SHOW THE STUDENTS
 
 function showStudent(student) {
-  let klon = HTML.template.cloneNode(true).content;
+  let expelled = expelledStudents.length;
+  document.querySelector(".ex").textContent = expelled;
 
+  let klon = HTML.template.cloneNode(true).content;
   //SET PREFECT
 
   if (student.prefect === true) {
@@ -279,6 +285,17 @@ function showStudent(student) {
     makePrefect(student);
   });
 
+  klon.querySelector("button.expel").addEventListener("click", () => {
+    console.log("expel");
+    expelledStudents.push(student);
+    console.log(expelledStudents);
+  });
+
+  klon.querySelector(".prefect").addEventListener("click", () => {
+    prefects.push(student);
+    console.log(prefects);
+  });
+
   HTML.dest.appendChild(klon);
 
   //SHOW POPUP
@@ -288,30 +305,48 @@ function showStudent(student) {
   });
 }
 
+// EXPELL
+
+function expellStudent(student) {
+  console.log("expell");
+  student.expelled = true;
+
+  expelledStudents.push(student);
+
+  filteredArray = allOfStudent.filter((student) => {
+    return student.expelled === false;
+  });
+
+  const removeStudent = allOfStudent.indexOf(student);
+  allOfStudent.splice(removeStudent, 1);
+
+  displayList(filteredArray);
+}
+
 //FUNCTION FOR THE FILTER
 
 function displayList(student) {
-  //EMPTY THE LIST
+  //CLEAR LIST
 
   document.querySelector(".list").innerHTML = "";
 
-  //BUILD NEW LIST
+  //MAKE NEW LIST
 
   currentList.forEach(showStudent);
 }
 
-//PREFECTS
+//MAKE PREFECTS
 
 function makePrefect(clickedStudent) {
   console.log("makeprefect");
   document.querySelector("#popup_samehouse > div > button").addEventListener("click", closeError);
   document.querySelector("#popup_toomany > div > button").addEventListener("click", closeError);
 
-  const allPrefects = allStudents.filter(student => {
+  const allPrefects = allStudents.filter((student) => {
     return student.prefect === true;
   });
 
-  const prefectsOfHouse = allPrefects.some(student => {
+  const prefectsOfHouse = allPrefects.some((student) => {
     return student.house === clickedStudent.house;
   });
 
@@ -327,7 +362,7 @@ function makePrefect(clickedStudent) {
     clickedStudent.prefect = true;
   }
   console.log("j");
-  if (allPrefects.length > 1) {
+  if (clickedStudent.length < 0) {
     clickedStudent.prefect = false;
     console.log("ERROR: Du kan ikke have mere end to prefects");
     document.querySelector("#popup_toomany").style.display = "block";
@@ -346,7 +381,7 @@ function closeError() {
 //FILTER
 
 function filterGryffindor() {
-  currentList = allOfStudent.filter(isGryffindor);
+  // currentList = allOfStudent.filter(isGryffindor);
   displayList(currentList);
 }
 
@@ -366,6 +401,11 @@ function showAll() {
   currentList = allStudents.filter(isAll);
   displayList(currentList);
 }
+
+// function showExpelled() {
+//   currentList = allStudents.filter(isExpelled);
+//   displayList(expelledStudents);
+// }
 
 function isGryffindor(student) {
   return student.house === "Gryffindor";
@@ -389,28 +429,28 @@ function isAll(student) {
 //PETER ULF
 
 function sortButtonClick() {
-  console.log("sortButton");
+  console.log("sort");
 
   //const sort = this.dataset.sort;
   if (this.dataset.action === "sort") {
     clearAllSort();
-    console.log("forskellig fra sorted", this.dataset.action);
+    console.log(this.dataset.action);
     this.dataset.action = "sorted";
   } else {
     if (this.dataset.sortDirection === "asc") {
       this.dataset.sortDirection = "desc";
-      console.log("sortdir desc", this.dataset.sortDirection);
+      console.log(this.dataset.sortDirection);
     } else {
       this.dataset.sortDirection = "asc";
-      console.log("sortdir asc", this.dataset.sortDirection);
+      console.log(this.dataset.sortDirection);
     }
   }
   mySort(this.dataset.sort, this.dataset.sortDirection);
 }
 
 function clearAllSort() {
-  console.log("clearAllSort");
-  myHeading.forEach(botton => {
+  console.log("clear");
+  myHeading.forEach((botton) => {
     botton.dataset.action = "sort";
   });
 }
@@ -419,13 +459,13 @@ function mySort(sortBy, sortDirection) {
   console.log(`mySort-, ${sortBy} sortDirection-  ${sortDirection}  `);
   let desc = 1;
 
-  currentList = allStudents.filter(allStudents => true);
+  currentList = allStudents.filter((allStudents) => true);
 
   if (sortDirection === "desc") {
     desc = -1;
   }
 
-  currentList.sort(function(a, b) {
+  currentList.sort(function (a, b) {
     var x = a[sortBy];
     var y = b[sortBy];
     if (x < y) {
@@ -451,10 +491,16 @@ function filterBottonClick() {
 function myFilter(filter) {
   console.log("myFilter", filter);
   if (filter === "all") {
-    currentList = allStudents.filter(allStudents => true);
+    currentList = allStudents.filter((allStudents) => true);
+    displayList(currentList);
+  } else if (filter === "expelled") {
+    currentList = expelledStudents.filter((expelledStudents) => true);
+    displayList(currentList);
+  } else if (filter === "prefects") {
+    currentList = prefects.filter((prefects) => true);
     displayList(currentList);
   } else {
-    currentList = allStudents.filter(student => student.house === filter);
+    currentList = allStudents.filter((student) => student.house === filter);
     displayList(currentList);
   }
 }

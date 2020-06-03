@@ -119,7 +119,7 @@ body {
 .top {
   height: 60vw;
   width: 100%;
-  background-image: url(/HogwartsCastle_WB_F4_HogwartsThroughTheTrees_Illust_100615_Land.jpg);
+  background-image: url("HogwartsCastle_WB_F4_HogwartsThroughTheTrees_Illust_100615_Land.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   color: white;
